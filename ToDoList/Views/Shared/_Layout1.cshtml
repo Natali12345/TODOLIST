@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/css/list.css" rel="stylesheet" />
+    <link href="~/jquery/jquery-ui.css" rel="stylesheet" />
+    <script src="~/jquery/jquery.js"></script>
+    <script src="~/jquery/jquery-ui.js"></script>
+    @RenderSection("CssAndScript1", false)
+</head>
+
+
+<body id="bodyy">
+    <header id="menu">
+        <div id="boxImg"> <img id="menuImg" src="~/Pictures/menuu.png" /></div>
+        <div style="flex-grow:3"></div>
+
+        <div id="welcome">
+            <div>
+                Welcome @User.Identity.Name
+            </div>
+            <div id="logout" class="boxLog"> <a asp-controller="User" asp-action="Logout">Log out</a></div>
+        </div>
+    </header>
+
+
+
+
+
+    <div class="container">
+        <div id="left">
+            <ul>
+                <li>
+                    <a asp-controller="list" asp-action="ListToday">Today</a>
+                </li>
+                <li> <a asp-controller="list" asp-action="ListCome">Forthcoming</a></li>
+            </ul>
+        </div>
+        <div id="right">
+            @RenderBody()
+        </div>
+    </div>
+   
+</body>
+
+
+
+
+</html>
+<script>
+    $(document).ready(() => {
+        $("#welcome").mouseenter(() => {
+            $("#logout").addClass("close");
+
+        });
+
+    });
+    
+    $(document).ready(() => {
+        $(document.body).click(() => {
+            $("#logout").removeClass("close");
+
+        });
+
+    });
+
+
+    $("#boxImg").click(() => {
+        $("#left").toggleClass("leftshow");
+
+    });
+
+</script>

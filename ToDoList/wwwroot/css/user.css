@@ -1,0 +1,85 @@
+﻿body {
+    background-color: #fafafa;
+}
+
+.mainPart {
+    display: flex;
+    justify-content: center;
+}
+
+.registrationBox {
+    background-color: #ffffff;
+    border: solid 1px #dbdbdb;
+    margin: 50px 0;
+    border-radius: 8px;
+    padding: 25px;
+}
+
+
+
+.boxImg{
+    text-align: left;
+    margin-bottom: 14px;
+}
+
+.boxData {
+
+    max-width: 400px;
+    font-size: 15px;
+    color: #000;
+    margin: auto;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.field {
+    margin-bottom: 10px;
+}
+
+.input {
+    font-size: 15px;
+    font-weight: 400;
+    width: 400px;
+    padding: 0.75em 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#btnRegistration {
+    cursor: pointer;
+    color: white;
+    background-color: #026df0;
+    height: auto;
+    width: 100%;
+    font-size: 15px !important;
+    padding: 9px 12px;
+    border-radius: 5px;
+    border: 1px solid #0573fa;
+    margin-top:10px;
+}
+#btnRegistration:hover {
+    background-color: #0061d9;
+}
+.line {
+    border-bottom: 1px solid #cfcfcf;
+    width: 100%;
+    padding-top:10px;
+}
+
+.linkBox {
+    margin-top: 20px;
+    margin-left:100px;
+    font-size: 15px;
+}
+
+#signin {
+    color: #026df0;
+    text-decoration: none;
+    padding-left:5px;
+}
+    #signin:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }

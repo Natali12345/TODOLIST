@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "index";
+    Layout = "_Layout1";
+
+
+}
+@section CssAndScript1 {
+    <link href="~/css/list.css" rel="stylesheet" />
+    <link href="~/jquery/jquery-ui.css" rel="stylesheet" />
+    <script src="~/jquery/jquery.js"></script>
+    <script src="~/jquery/jquery-ui.js"></script>
+
+}
+
+
+
+
+
+
+<div>Today</div><div id="dateToday">@DateTime.Now.ToString("ddd MMMM d yyyy", System.Globalization.CultureInfo.GetCultureInfoByIetfLanguageTag("en-us"))</div>
+
+
+<script>
+
+    $(() => {
+        return;
+   
+    let dateT = new Date();
+    
+    var options = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
+    g = dateT.toLocaleDateString("En-en", options);
+
+   
+    $("#dateToday").html(g);
+    });
+</script>

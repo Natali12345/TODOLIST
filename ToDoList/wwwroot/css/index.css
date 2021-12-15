@@ -1,0 +1,67 @@
+﻿
+@media (min-width: 400px) {
+    body {
+        background-image: url("../Pictures/background.png");
+        background-repeat: no-repeat;
+        background-position: 50% 30%;
+        background-size: cover;
+    }
+}
+@media (min-width: 0px) and (max-width: 400px) {
+    body {
+        background-image: url("../Pictures/background.png");
+        background-repeat: no-repeat;
+       
+        background-size: cover;
+        background-position: 50% -400%;
+    }
+}
+* {
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+#imgB {
+    width: 100%;
+  position:absolute;
+    top:-50%;
+    z-index:-1;
+}
+
+#text {
+    margin-top:50px;
+    display: flex;
+    font-weight: bold;
+    font-size: 70px;
+    justify-content: center;
+    font-family: system-ui;
+}
+#text2 {
+    display: flex;
+    font-weight: bold;
+    font-size: 70px;
+    justify-content: center;
+  margin-bottom:30px;
+}
+
+#clickStart {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    background-color: #026df0;
+    font-size: 22px;
+    padding: 10px 60px;
+    border-radius: 10px;
+ 
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 40px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+    #clickStart:hover {
+        filter: brightness(120%);
+    }
+

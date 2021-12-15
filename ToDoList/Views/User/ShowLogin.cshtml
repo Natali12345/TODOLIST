@@ -1,0 +1,60 @@
+﻿@{
+    Layout = null;
+}
+<link href="~/css/user.css" rel="stylesheet" />
+
+<main class="mainPart">
+
+    <div class="registrationBox">
+
+        <div class="boxImg">
+            <a asp-controller="home" asp-action="index">
+                <svg viewBox="0 0 260 100" width="140" xmlns="http://www.w3.org/2000/svg" stroke="null">
+                    <g stroke="null" id="Layer_1">
+                        <title stroke="null">Layer 1</title>
+                        <text fill="#026df0" stroke="#0000ff" x="114.6" y="80.2" id="svg_2" font-size="34" font-family="Noto Sans JP" text-anchor="start" xml:space="preserve" font-style="italic">ToDoList</text>
+                        <ellipse fill="#e5e5e5" stroke-width="0" cx="48.6" cy="50.2" id="svg_3" rx="49" ry="49" stroke="#0000ff" />
+                        <ellipse fill="#026df0" stroke-width="0" cx="47.1" cy="64.7" id="svg_6" rx="36.5" ry="33.5" stroke="#0000ff" />
+                        <ellipse fill="#ffffff" stroke="#0000ff" stroke-width="0" cx="104.1" cy="253.7" id="svg_8" rx="8.5" ry="10.5" />
+                        <ellipse fill="#ffffff" stroke-width="0" cx="47.6" cy="51.20009" id="svg_9" rx="22" ry="21" stroke="#0000ff" />
+                    </g>
+                </svg>
+            </a>
+        </div>
+
+
+        <div class="boxData">
+
+            <h1>Sign in</h1>
+            <form action="/User/GoToLogin" method="post">
+                <div class="field">
+                    <label>Email address:</label>
+                    <input name="email" class="input" type="email">
+                </div>
+
+                <div class="field">
+                    <label>Password:</label>
+                    <input name="password" class="input" type="password">
+                </div>
+
+             
+
+                <button id="btnRegistration">
+                    <span>Sign in</span>
+                </button>
+            </form>
+
+            <div class="line"></div>
+
+            <div class="linkBox">
+                Don't have an account?<a id="signin" asp-controller="user" asp-action="ShowRegistration">Registration</a>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+</main>

@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/menu.css" rel="stylesheet" />
+    @RenderSection("CssAndScript", false)
+</head>
+<body>
+    <header id="headPart">
+        <div style="flex-grow:0.7"></div>
+
+        <a class="a1" asp-controller="home" asp-action="index">
+
+
+
+            <svg viewBox="0 0 280 80" width="130" xmlns="http://www.w3.org/2000/svg" stroke="null">
+                <g stroke="null" id="Layer_1">
+                    <title stroke="null">Layer 1</title>
+                    <text fill="#026df0" stroke="#0000ff" x="91.6" y="61.2" id="svg_2" font-size="50" font-family="Noto Sans JP" text-anchor="start" xml:space="preserve" font-style="italic">ToDoList</text>
+                    <ellipse fill="#e5e5e5" stroke-width="0" cx="40.6" cy="40.7" id="svg_3" rx="40" ry="39.5" stroke="#0000ff" />
+                    <ellipse fill="#026df0" stroke-width="0" cx="39.1" cy="52.7" id="svg_6" rx="27" ry="27" stroke="#0000ff" />
+                    <ellipse fill="#ffffff" stroke="#0000ff" stroke-width="0" cx="104.1" cy="253.7" id="svg_8" rx="8.5" ry="10.5" />
+                    <ellipse fill="#ffffff" stroke-width="0" cx="40.6" cy="41.20009" id="svg_9" rx="15" ry="15" stroke="#0000ff" />
+                </g>
+
+            </svg>
+        </a>
+
+        <a class="link">About</a>
+        <a class="link">Contacts</a>
+        <a class="link"></a>
+
+        <div style="flex-grow:1.5"></div>
+
+       
+            <a class="link" asp-controller="user" asp-action="ShowLogin">Sign in</a>
+            <a class="link" asp-controller="user" asp-action="ShowRegistration">Registration</a>
+
+        <div style="flex-grow:1"></div>
+    </header>
+
+
+
+
+
+
+
+
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
