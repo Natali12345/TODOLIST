@@ -35,6 +35,9 @@ namespace ToDoList.Controllers
         [HttpPost]
         public IActionResult CreateRegistration(RegistrationModel model)
         {
+            //so you do undo all the time when try stuff, but f you know you will just try, you can mae sure you 
+            //check in the file first like this.
+
           
             if (model.password == model.password2)
             {
