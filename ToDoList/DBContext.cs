@@ -12,12 +12,10 @@ namespace ToDoList
 
 
         public DbSet<UserInfo> userInfo { get; set; }
-
-
+        public DbSet<UserTask> userTask { get; set; }
         public DBContext(DbContextOptions options) : base(options)
         {
            
-            Database.EnsureCreated();
         }
 
   
@@ -31,7 +29,18 @@ namespace ToDoList
 
 
     }
+    public class UserTask
+    {
+        [Key]
+        public int Id { get; set; }
 
+        public UserInfo LoginUser { get; set; }
+        public string Taskk { get; set; }
+        public DateTime TaskCreate { get; set; }
+        public DateTime? TaskDone { get; set; }
+
+
+    }
 
     public class UserInfo
     {
@@ -39,6 +48,7 @@ namespace ToDoList
 
         public string LoginUser { get; set; }
         public string PasswordUser { get; set; }
+
     }
 
 

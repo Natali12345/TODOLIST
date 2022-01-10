@@ -29,20 +29,18 @@
         border-radius:10px;
     }
 .close {
-  display : block!important;
+    display: block !important;
     z-index: 2;
-    position:absolute;
+    position: absolute;
     background-color: #41414f;
     font-size: 17px;
-    top : 50px;
+    top: 50px;
     margin-top: 1px;
     margin-right: 10px;
     border-radius: 5px;
     justify-content: center !important;
-    padding-top: 7px;
-    padding-bottom: 7px;
- 
- 
+    padding: 7px 70px;
+
 }
     .close a {
         text-decoration: none;
@@ -98,6 +96,7 @@
         list-style-type: none;
         padding-top: 30px;
         width: 98%;
+        height:auto;
     }
         #left ul li {
             padding-bottom: 12px;

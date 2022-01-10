@@ -1,0 +1,53 @@
+﻿*{
+    box-sizing:border-box;
+    margin:0px;
+}
+.come {
+    margin-left: 15%;
+    margin-top: 40px;
+    margin-right:15%;
+}
+
+.DaysHolder {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.daysA {
+    font-size: 16px;
+    text-decoration: none;
+    width: 100% !important;
+    color: black;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0px 15px 0px;
+   
+}
+.days {
+    
+    width: 12.5%;
+  
+}
+    .days:hover {
+        background: rgb(242,240,240);
+        background: radial-gradient(circle, rgba(242,240,240,1) 0%, rgba(232,230,230,1) 100%);
+    }
+
+.linee {
+    width: 100%;
+    border-bottom: 1px solid #e8e6e6;
+}
+
+#monthDate {
+    margin-bottom: 15px;
+    display: flex;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight:bold;
+}
+#monthImg{
+margin-top:-5px;
+}
+
+#disFlex2id{
+    margin-left:0px!important;
+}

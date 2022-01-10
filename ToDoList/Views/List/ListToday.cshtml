@@ -1,36 +1,108 @@
-﻿@{
+﻿@using ToDoList
+@model List<UserTask>
+@{
     ViewData["Title"] = "index";
     Layout = "_Layout1";
 
 
 }
 @section CssAndScript1 {
-    <link href="~/css/list.css" rel="stylesheet" />
-    <link href="~/jquery/jquery-ui.css" rel="stylesheet" />
-    <script src="~/jquery/jquery.js"></script>
-    <script src="~/jquery/jquery-ui.js"></script>
+<link href="~/css/today.css" rel="stylesheet" />
+<link href="~/jquery/jquery-ui.css" rel="stylesheet" />
 
+<script src="~/jquery/jquery.js"></script>
+<script src="~/jquery/jquery-ui.js"></script>
 }
 
 
 
 
+<div class="come">
+<div class="disFlex1"><div id="today">Today </div><div id="dateToday">@DateTime.Now.ToString("ddd d MMM  ", System.Globalization.CultureInfo.GetCultureInfoByIetfLanguageTag("en-us"))</div></div>
 
 
-<div>Today</div><div id="dateToday">@DateTime.Now.ToString("ddd MMMM d yyyy", System.Globalization.CultureInfo.GetCultureInfoByIetfLanguageTag("en-us"))</div>
+    @foreach (var task in Model)
+    {
+        <form method="post" action="/List/CloseTask">
+              <input type="hidden" name="ActionName" value="@this.Context.Request.RouteValues["Action"]" />
+            <input type="hidden" name="id" value="@task.Id" />
+            <div class="lineFlex">
+                <div class="clickk">
+
+                    <svg width="25" height="25"
+                     xmlns="http://www.w3.org/2000/svg" stroke="null">
+                        <g stroke="null" class="checkg">
+                            <ellipse class="CloseButtonColor" stroke="#4c4c4c" fill="#000000" cx="12.60001" cy="12.36" id="svg_17" rx="11.5" ry="11.5" fill-opacity="1" />
+                            <path class="markk" stroke="#FFFFFF" id="svg_18" d="m7.1014,13.16408l0.96707,-1.52355l2.64927,4.17174l4.41625,-6.95289l0.96741,1.52248l-5.38366,8.47752" fill="#666666" />
+
+                        </g>
+
+                    </svg>
+                </div>
+
+                <div class="taskEach">@task.Taskk</div>
+
+                <div><img class="clickDel" src=~/Pictures/del.png></div>
+
+            </div>
+            <div class="line"></div>
+        </form>
+    }
+
+<partial name="_AddTask"  model="@DateTime.Now.Date" />
+
+
+</div>
 
 
 <script>
-
     $(() => {
-        return;
-   
-    let dateT = new Date();
-    
-    var options = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
-    g = dateT.toLocaleDateString("En-en", options);
+       $(".disFlex2").click((e) => {
+            $(".disFlex2",$(e.target).parents(".addParent")).css("display","none");
+            $(".boxInput",$(e.target).parents(".addParent")).css("display","block");
+        });
 
    
-    $("#dateToday").html(g);
+        $("#btn2").click((e) => {
+            $(".disFlex2",e.target.parentElement).css("display","flex");
+            $(".boxInput",e.target.parentElement).css("display","none");
+        });
+
+
+
+         $(".checkg").mouseenter((e) => {
+            $(".CloseButtonColor", e.target.parentElement).css("fill", "#cbced4");
+            $(".markk", e.target.parentElement).css("fill", "#696b6e");
+            $(".markk", e.target.parentElement).css("stroke", "#696b6e");
+        });
+
+        $(".checkg").mouseleave((e) => {
+            $(".CloseButtonColor", e.target.parentElement).css("fill", "white");
+            $(".markk", e.target.parentElement).css("fill", "white");
+            $(".markk", e.target.parentElement).css("stroke", "white");
+        });
+                $(".disFlex2").mouseenter((e) => {
+               $("#plus",e.target.parentElement).addClass("plusC");
+               $("#task",e.target.parentElement).addClass("taskC");
+        });
+
+        $(".disFlex2").mouseleave((e) => {
+               $("#plus",e.target.parentElement).removeClass("plusC");
+               $("#task",e.target.parentElement).removeClass("taskC");
+        });
+
+        $(".clickk").click((e) => {
+            $(e.target).parents("form").attr("action", "@Url.Action("CloseTask", "List")");
+            $(e.target).parents("form").submit();
+        });
+
+        $(".clickDel").click((e)=>{
+
+                 $(e.target).parents("form").attr("action", "@Url.Action("DeleteTask", "List")");
+                 $(e.target).parents("form").submit();
+        });
+        
+    
+
     });
 </script>
