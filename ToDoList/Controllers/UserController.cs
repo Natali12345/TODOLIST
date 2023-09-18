@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using ToDoList.Models;
 
@@ -39,12 +41,26 @@ namespace ToDoList.Controllers
 
             if (model.password == model.password2)
             {
+                byte[] salt = new byte[128 / 8];
 
+                using (RandomNumberGenerator rnd = RandomNumberGenerator.Create())
+                    rnd.GetBytes(salt);
+
+                
+                string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                    password: model.password,
+                    salt: salt,
+                    prf: KeyDerivationPrf.HMACSHA256,
+                    iterationCount: 100000,
+                    numBytesRequested: 256 / 8));
+                hashed += "~";
+                hashed += Convert.ToBase64String(salt);
                 _context.userInfo.Add(new UserInfo()
                 {
                     
                     LoginUser = model.email,
-                    PasswordUser = model.password
+                    PasswordUser = hashed 
+                    
                 });
            
                 _context.SaveChanges();
@@ -61,8 +77,26 @@ namespace ToDoList.Controllers
 
         public async Task<IActionResult> GoToLogin(LoginModel model)
         {
+            var user = _context.userInfo.FirstOrDefault(z => z.LoginUser == model.email);
+            if(user == null)
+            {
+                TempData["Error"] = "no correct password or email";
+                return RedirectToAction("ShowLogin");
+               
+            }
 
-            if (_context.userInfo.Any(z => z.LoginUser == model.email && z.PasswordUser == model.password))
+            string[] records = user.PasswordUser.Split('~');
+            byte[] salt = Convert.FromBase64String(records[1]);
+            string passwordHash = records[0];
+
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: model.password,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 100000,
+                numBytesRequested: 256 / 8));
+
+            if (hashed == passwordHash)
             {
 
                 var claims = new Claim[]

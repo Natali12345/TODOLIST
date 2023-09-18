@@ -86,17 +86,18 @@
 #left {
     display: flex;
     flex-wrap: wrap;
-    border-right:1px solid #f7f7f7;
+    border-right: 1px solid #f7f7f7;
     width: 350px;
-    height: 700px;
+    min-height: 700px;
     background-color: #fafafa;
     transition: width .5s;
+     
 }
     #left ul {
         list-style-type: none;
         padding-top: 30px;
         width: 98%;
-        height:auto;
+        
     }
         #left ul li {
             padding-bottom: 12px;

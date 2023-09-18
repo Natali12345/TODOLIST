@@ -9,14 +9,14 @@
 }
 @section CssAndScript1 {
 <link href="~/css/come.css" rel="stylesheet" />
-<link href="~/css/today.css" rel="stylesheet" />
+<link href="~/css/task.css" rel="stylesheet" />
 <link href="~/jquery/jquery-ui.css" rel="stylesheet" />
 
 <script src="~/jquery/jquery.js"></script>
 <script src="~/jquery/jquery-ui.js"></script>
 }
 
-<div class="come">
+<div class="rightSide">
     <form action="ListCome" method="get" id="form1">
         <div id="dpcontainer" class="ui-widget">
 
@@ -40,54 +40,39 @@
         @foreach (var d in Model.Days)
         {
 
-            <div class="days">  <a class="daysA" href="@d.Link">@d.Text</a></div>
+            <div class="days">
+                <a class="daysA mon" href="@Model.DayToURI(Url,d)">
+                    @Model.DateToDayName(d)
+                </a><a class="daysA" href="@Model.DayToURI(Url,d)">
+                    @Model.DateToMonthDate(d)
+                </a>
+            </div>
         }
     </div>
+   
+    @foreach (var entry in Model.Tasks.OrderBy(z => z.Key.Date))
+    {
+        <div class="come">
+            <div class="dayToList">@Model.DateForList(entry.Key) </div>
+            <div class="line"></div>
+
+            @foreach (var task in entry.Value)
+            {
+                <div><partial name="_task" model="@task" /> </div>
+            }
+
+
+            <div>
+                <partial name="_AddTask" model="@entry.Key.Date" />
+            </div>
+
+        </div>
+    }
     <div class="linee"></div>
+ 
 </div>
 
-@foreach (var entry in Model.Tasks.OrderBy(z => z.Key.Date))
-{<div class="come">
-    <div>@entry.Key.Text </div>
-    <div>
-        @foreach (var task in entry.Value)
-        {
-             
-            <form method="post" action="/List/CloseTask">
-                <input type="hidden" name="ActionName" value="@this.Context.Request.RouteValues["Action"]" />
-                <input type="hidden" name="id" value="@task.Id" />
-                <div class="lineFlex">
-                    <div class="clickk">
 
-                        <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg" stroke="null">
-                     
-                            <g stroke="null" class="checkg">
-                                <ellipse class="CloseButtonColor" stroke="#4c4c4c" fill="#000000" cx="12.60001" cy="12.36" id="svg_17" rx="11.5" ry="11.5" fill-opacity="1" />
-                                <path class="markk" stroke="#FFFFFF" id="svg_18" d="m7.1014,13.16408l0.96707,-1.52355l2.64927,4.17174l4.41625,-6.95289l0.96741,1.52248l-5.38366,8.47752" fill="#666666" />
-                            </g>
-                           
-                        </svg>
-                        
-                    </div>
-
-                    <div class="taskEach">@task.Taskk</div>
-
-                    <div><img class="clickDel" src=~/Pictures/del.png></div>
-                </div>
-               
-                <div class="line"></div>
-                
-            </form>
-            
-        }
-    </div>
-      
-         <div>
-        <partial name="_AddTask" model="@entry.Key.Date" />
-         </div>
-  
-</div>
-}
 
 
 
@@ -102,12 +87,13 @@
 
         $.datepicker.setDefaults($.datepicker.regional['ru']);
         $('#datep').datepicker({
-
+             range: 'period',
             changeMonth: true,
             changeYear: true,
             yearRange: ":+5",
             minDate: "0",
             constrainInput: true,
+
         }).datepicker("setDate", "@Model.Date");
 
         $("#datep").change(() => {
@@ -118,13 +104,13 @@
             $('#datep').datepicker("show");
         });
 
-     
+
         $(".disFlex2").click((e) => {
             $(".disFlex2",$(e.target).parents(".addParent")).css("display","none");
             $(".boxInput",$(e.target).parents(".addParent")).css("display","block");
         });
 
-   
+
         $("#btn2").click((e) => {
             $(".disFlex2",e.target.parentElement).css("display","flex");
             $(".boxInput",e.target.parentElement).css("display","none");
@@ -163,11 +149,31 @@
                  $(e.target).parents("form").attr("action", "@Url.Action("DeleteTask", "List")");
                  $(e.target).parents("form").submit();
         });
-        });
-    
-       
 
-   
+       $(".saveTask").click((e)=>{
+                 $(e.target).parents("form").attr("action", "@Url.Action("ChangeTask", "List")");
+                 $(e.target).parents("form").submit();
+            e.preventDefault();
+        });
+
+          $(".clickChange").click((e)=>{
+            $(".taskdisplayreadonly",$(e.target).parents(".taskEach")).css("display","none");
+            $(".taskEdit",$(e.target).parents(".taskEach")).css("display","block");
+        });
+
+        $(".cancelTask").click((e)=>{
+             $(".taskdisplayreadonly",$(e.target).parents(".taskEach")).css("display","flex");
+            $(".taskEdit",$(e.target).parents(".taskEach")).css("display","none");
+            e.preventDefault();
+
+        });
+
+
+    });
+
+
+
+
 </script>
 
 

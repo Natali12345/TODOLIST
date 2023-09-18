@@ -5,7 +5,7 @@
 }
 <div class="addParent">
 <div class="disFlex2" id="disFlex2id"><div id="plus">+</div><div id="task">Add task</div></div> 
-<!--disFlex bad name, use name that describe what this class is for like, AddTaskRow-->
+
 <div class="boxInput">
  
   <form  method="post" action="/List/SaveTask">
@@ -13,15 +13,13 @@
       
         <input type="hidden" name="Create" value="@Model" />
         <input type="hidden" name="ActionName" value="@this.Context.Request.RouteValues["Action"]" />
-        <!--so i add this hidden field to know what action made this partial so we can use it in the SaveTask
-            to return to correct action.
-        -->
+    
         
 
     <textarea wrap="soft" id="inputT" type="text" name="Taskk"></textarea>  
-     <div id="buttons"> <!--id is bad -->
+     <div class="buttons"> 
     <button type="submit" id="btn1"> Add task</button>
-    <button id="btn2"> Cancel</button> <!--button 2 bad name, should be btnCancel and it can't be id because add task many times in html-->
+    <button id="btn2"> Cancel</button>
  
     </div>
     </form>

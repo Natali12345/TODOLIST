@@ -1,0 +1,51 @@
+﻿@model ToDoList.UserTask
+<!--you only want the form part in here, not the loop-->
+
+<form method="post" action="/List/CloseTask">
+    <input type="hidden" name="ActionName" value="@this.Context.Request.RouteValues["Action"]" />
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="lineFlex">
+        <div class="clickk">
+
+            <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg" stroke="null">
+
+                <g stroke="null" class="checkg">
+                    <ellipse class="CloseButtonColor" stroke="#4c4c4c" fill="#000000" cx="12.60001" cy="12.36" id="svg_17" rx="11.5" ry="11.5" fill-opacity="1" />
+                    <path class="markk" stroke="#FFFFFF" id="svg_18" d="m7.1014,13.16408l0.96707,-1.52355l2.64927,4.17174l4.41625,-6.95289l0.96741,1.52248l-5.38366,8.47752" fill="#666666" />
+                </g>
+
+            </svg>
+
+        </div>
+
+        <div class="taskEach">
+
+            <div class="taskdisplayreadonly">
+                <div class="textTask">@Model.Taskk</div>
+             
+           <img class="clickChange" src="~/Pictures/change.png">
+            </div>
+
+            <div class="taskEdit">
+                <textarea class="textArea"name="Text">@Model.Taskk</textarea>
+                 <div class="buttons"> 
+                <button type="submit" class="saveTask">Save</button>
+                <button class="cancelTask">Cancel</button>
+                  </div>
+            </div>
+    
+        </div>
+         <img class="clickDel" src=~/Pictures/del.png>
+    </div>
+    <div class="line"></div>
+
+</form>
+
+
+
+
+
+
+
+
+

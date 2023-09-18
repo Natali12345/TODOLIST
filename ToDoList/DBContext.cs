@@ -31,12 +31,17 @@ namespace ToDoList
     }
     public class UserTask
     {
+ 
         [Key]
         public int Id { get; set; }
 
-        public UserInfo LoginUser { get; set; }
+
+        public UserInfo LoginUser { get; set; } 
+    
         public string Taskk { get; set; }
+
         public DateTime TaskCreate { get; set; }
+
         public DateTime? TaskDone { get; set; }
 
 

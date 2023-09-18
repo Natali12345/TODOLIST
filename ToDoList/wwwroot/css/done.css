@@ -1,0 +1,20 @@
+﻿.boxSide {
+    margin-left: 15%;
+    margin-top: 40px;
+    margin-right: 15%;
+}
+
+
+.allDoneTasks {
+
+}
+
+.clickRenew {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.marginLittle{
+    margin-bottom:10px;
+}
