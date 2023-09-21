@@ -7,11 +7,11 @@
     Layout = "_Layout1";
 }
 @section CssAndScript1 {
-<link href="~/css/task.css" rel="stylesheet" />
-<link href="~/css/done.css" rel="stylesheet" />
-<link href="~/jquery/jquery-ui.css" rel="stylesheet" />
-<script src="~/jquery/jquery.js"></script>
-<script src="~/jquery/jquery-ui.js"></script>
+    <link href="~/css/task.css" rel="stylesheet" />
+    <link href="~/css/done.css" rel="stylesheet" />
+    <link href="~/jquery/jquery-ui.css" rel="stylesheet" />
+    <script src="~/jquery/jquery.js"></script>
+    <script src="~/jquery/jquery-ui.js"></script>
 }
 <div class="boxSide">
     <form action="/ListDone/DoneTask" method="get">
@@ -30,43 +30,43 @@
     <div class="allDoneTasks">
         @foreach (var task in Model.Tasks)
         {
-         
+
             <form method="post" action="/ListDone/DoneTask">
-                
+
                 <input type="hidden" name="id" value="@task.Id" />
 
                 <div class="lineFlex">
-                
-                <div class="dpcontainer ui-widget" id="@string.Concat("dc", task.Id.ToString())">  
-                 <input class="datep" type="hidden" name="dateString" id="@string.Concat("dp", task.Id.ToString())" />
-             
-                 <img class="clickRenew" id="@string.Concat("cr", task.Id.ToString())" src=~/Pictures/renew.png>
-                
-                 </div>
-        
-                 <script type="text/javascript">
-                      $('#@string.Concat("dp", task.Id.ToString())').datepicker({
 
-                   
-             range: 'period',
-            changeMonth: true,
-            changeYear: true,
-            yearRange: ":+5",
-            minDate: "0",
-            constrainInput: true,
-           
-            onSelect : (date)=>{
-                
-                 SendDateChange( @task.Id , date); 
-            }
+                    <div class="dpcontainer ui-widget" id="@string.Concat("dc", task.Id.ToString())">
+                        <input class="datep" type="hidden" name="dateString" id="@string.Concat("dp", task.Id.ToString())" />
 
-        }).datepicker("setDate","@task.TaskCreate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)"); 
-      
-        $("#@string.Concat("cr", task.Id.ToString())").click((e) => {
-            $('#@string.Concat("dp", task.Id.ToString())').datepicker("show");
-        });
+                        <img class="clickRenew" id="@string.Concat("cr", task.Id.ToString())" src=~/Pictures/renew.png>
 
-                     </script>
+                    </div>
+
+                    <script type="text/javascript">
+                        $('#@string.Concat("dp", task.Id.ToString())').datepicker({
+
+
+                            range: 'period',
+                            changeMonth: true,
+                            changeYear: true,
+                            yearRange: ":+5",
+                            minDate: "0",
+                            constrainInput: true,
+
+                            onSelect: (date) => {
+
+                                SendDateChange(@task.Id , date);
+                            }
+
+                        }).datepicker("setDate", "@task.TaskCreate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)");
+
+                        $("#@string.Concat("cr", task.Id.ToString())").click((e) => {
+                            $('#@string.Concat("dp", task.Id.ToString())').datepicker("show");
+                        });
+
+                    </script>
 
 
 
@@ -90,76 +90,76 @@
                     <img class="clickDel" src=~/Pictures/del.png>
                 </div>
                 <div class="line"></div>
-        
+            </form>
         }
 
     </div>
 </div>
 <script>
 
-    function SendDateChange(id, date){
-    
-        $.ajax({
-             method : "POST",
-             url : "@Url.Action("ChooseDate")",
-             data : { id : id, selectDate : date}
+    function SendDateChange(id, date) {
 
-        }).done((z)=>{
+        $.ajax({
+            method: "POST",
+            url: "@Url.Action("ChooseDate")",
+            data: { id: id, selectDate: date }
+
+        }).done((z) => {
             alert("change");
         });
     }
 
-       $(() => {
-    $.datepicker.setDefaults($.datepicker.regional['ru']);
-       $('#dateFrom').datepicker({
+    $(() => {
+        $.datepicker.setDefaults($.datepicker.regional['ru']);
+        $('#dateFrom').datepicker({
             range: 'period',
-           changeMonth: true,
-           changeYear: true,
-           yearRange: ":+5",
-           minDate: "0",
-           constrainInput: true,
+            changeMonth: true,
+            changeYear: true,
+            yearRange: ":+5",
+            minDate: "0",
+            constrainInput: true,
 
-       }).datepicker("setDate", "@Model.From");
+        }).datepicker("setDate", "@Model.From");
 
         $.datepicker.setDefaults($.datepicker.regional['ru']);
-       $('#dateToo').datepicker({
+        $('#dateToo').datepicker({
             range: 'period',
-           changeMonth: true,
-           changeYear: true,
-           yearRange: ":+5",
-           minDate: "0",
-           constrainInput: true,
+            changeMonth: true,
+            changeYear: true,
+            yearRange: ":+5",
+            minDate: "0",
+            constrainInput: true,
 
-       }).datepicker("setDate", "@Model.To");
+        }).datepicker("setDate", "@Model.To");
 
-        $(".clickDel").click((e)=>{
+        $(".clickDel").click((e) => {
 
-                $(e.target).parents("form").attr("action", "@Url.Action("DeleteTask", "ListDone",
-new {searchTask = Model.SearchText, dateStringFrom = Model.From, dateStringTo = Model.To })");
-                $(e.target).parents("form").submit();
-       });
+            $(e.target).parents("form").attr("action", "@Url.Action("DeleteTask", "ListDone",
+        new {searchTask = Model.SearchText, dateStringFrom = Model.From, dateStringTo = Model.To })");
+                            $(e.target).parents("form").submit();
+        });
 
-         $(".saveTask").click((e)=>{
-                $(e.target).parents("form").attr("action", "@Url.Action("ChangeTask", "ListDone",
-new {searchTask = Model.SearchText, dateStringFrom = Model.From, dateStringTo = Model.To })");
-                $(e.target).parents("form").submit();
-           e.preventDefault();
-       });
+        $(".saveTask").click((e) => {
+            $(e.target).parents("form").attr("action", "@Url.Action("ChangeTask", "ListDone",
+        new {searchTask = Model.SearchText, dateStringFrom = Model.From, dateStringTo = Model.To })");
+                            $(e.target).parents("form").submit();
+            e.preventDefault();
+        });
 
-       $(".clickChange").click((e)=>{
-           $(".taskdisplayreadonly",$(e.target).parents(".taskEach")).css("display","none");
-           $(".taskEdit",$(e.target).parents(".taskEach")).css("display","block");
-       });
+        $(".clickChange").click((e) => {
+            $(".taskdisplayreadonly", $(e.target).parents(".taskEach")).css("display", "none");
+            $(".taskEdit", $(e.target).parents(".taskEach")).css("display", "block");
+        });
 
-       $(".cancelTask").click((e)=>{
-            $(".taskdisplayreadonly",$(e.target).parents(".taskEach")).css("display","flex");
-           $(".taskEdit",$(e.target).parents(".taskEach")).css("display","none");
-           e.preventDefault();
+        $(".cancelTask").click((e) => {
+            $(".taskdisplayreadonly", $(e.target).parents(".taskEach")).css("display", "flex");
+            $(".taskEdit", $(e.target).parents(".taskEach")).css("display", "none");
+            e.preventDefault();
 
-       });
+        });
 
-          $.datepicker.setDefaults($.datepicker.regional['ru']);  
-          
-       
-       });
+        $.datepicker.setDefaults($.datepicker.regional['ru']);
+
+
+    });
 </script>
